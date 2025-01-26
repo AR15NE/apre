@@ -68,7 +68,7 @@ export const agentPerformanceRoutes: Routes = [
   },
   {
     path: 'call-duration-by-agent',
-    component: CallDurationByAgentComponent // Add this line
+    component: CallDurationByAgentComponent // Added for major development task 
   }
 ];
 

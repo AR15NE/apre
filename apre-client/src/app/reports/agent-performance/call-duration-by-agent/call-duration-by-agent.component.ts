@@ -76,10 +76,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   `
 })
 export class CallDurationByAgentComponent {
+  // Performance data to be displayed in the chart
   performanceData: number[] = []; // Initially empty
+  // List of agents
   agents: string[] = []; // Initially empty
   showChart: boolean = false; // Initially hidden
 
+  // Define the form group with agent control
   agentForm = this.fb.group({
     agent: [null, Validators.required]
   });
@@ -92,7 +95,7 @@ export class CallDurationByAgentComponent {
         console.log('Agents fetched:', this.agents); // Logs the fetched agents
       },
       error: (err) => {
-        console.error('Error fetching agents:', err);
+        console.error('Error fetching agents:', err); // Logs any error that occurs while fetching agents
       }
     });
   }
@@ -100,6 +103,7 @@ export class CallDurationByAgentComponent {
   fetchPerformanceData() {
     const agent = this.agentForm.controls['agent'].value;
     if (agent) {
+      // Fetch performance data from the API for the selected agent
       this.http.get(`${environment.apiBaseUrl}/reports/agent-performance/call-duration-by-agent/${agent}`).subscribe({
         next: (data: any) => {
           this.performanceData = data[0].callDurations;
@@ -110,11 +114,11 @@ export class CallDurationByAgentComponent {
           console.error('Error fetching call duration by agent data:', error);
         },
         complete: () => {
-          this.showChart = true;
+          this.showChart = true; // Show the chart after data is fetched
         }
       });
     } else {
-      alert('Please select an agent.');
+      alert('Please select an agent.'); // Alert if no agent is selected
     }
   }
 

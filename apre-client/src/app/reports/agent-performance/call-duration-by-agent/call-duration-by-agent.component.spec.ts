@@ -70,8 +70,7 @@ describe('CallDurationByAgentComponent', () => {
     const req = httpMock.expectOne('http://localhost:3000/api/reports/agent-performance/agents');
     expect(req.request.method).toEqual('GET');
     req.flush([]); // Return empty array
-
-    // Add your test logic here for fetching performance data
+    
     expect(component).toBeTruthy();
   });
 
