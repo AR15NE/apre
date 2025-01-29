@@ -13,7 +13,8 @@ import { TableComponent } from './../../../shared/table/table.component';
     <div class="region-container">
       <form class="form" [formGroup]="regionForm" (ngSubmit)="onSubmit()">
         <div class="form__group">
-          <label class="label" for="region">Region</label>
+        <!--Added asterisk so it is more clear to the user that the field is required -->
+          <label class="label" for="region">Region <span style="color: red;">*</span></label>
           <select class="select" formControlName="region" id="region" name="region">
             @for(region of regions; track region) {
               <option value="{{ region }}">{{ region }}</option>
@@ -61,7 +62,7 @@ export class SalesByRegionTabularComponent {
   regions: string[] = [];
 
   regionForm = this.fb.group({
-    region: [null, Validators.compose([Validators.required])]
+    region: [null, Validators.compose([Validators.required])] //already marked as required 
   });
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
